@@ -1,4 +1,4 @@
-A new Flutter project.
+# AniNews app
 ## ScreenShot
 
 | Home Page       | favorited Page  |
