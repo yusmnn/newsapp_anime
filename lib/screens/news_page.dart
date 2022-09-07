@@ -1,22 +1,39 @@
-//now let's for the details screen
-
 import 'package:flutter/material.dart';
+import 'package:aninews/components/my_color.dart';
+import 'package:aninews/components/my_typography.dart';
 import '../models/news_model.dart';
+import '../widgets/favorite_news.dart';
 
-class DetailsScreen extends StatefulWidget {
-  const DetailsScreen(this.data, {Key? key}) : super(key: key);
-  final NewsData data;
-  @override
-  State<DetailsScreen> createState() => _DetailsScreenState();
-}
-
-class _DetailsScreenState extends State<DetailsScreen> {
+// ignore: must_be_immutable
+class NewsPage extends StatelessWidget {
+  NewsPage(this.data, {Key? key}) : super(key: key);
+  NewsData data;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0.0,
-        iconTheme: IconThemeData(color: Colors.orange.shade900),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: MyColor.menuAppbar,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        actions: const [FavoriteNews()],
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Colors.blue,
+                Colors.blueAccent.shade100,
+              ],
+            ),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -26,66 +43,63 @@ class _DetailsScreenState extends State<DetailsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                widget.data.title!,
-                style: const TextStyle(
-                  fontSize: 26.0,
-                  fontWeight: FontWeight.bold,
-                ),
+                data.title!,
+                style: MyTypografy.dataTitle,
               ),
               const SizedBox(
                 height: 8.0,
               ),
               Text(
-                widget.data.author!,
+                data.author!,
                 style: const TextStyle(
-                  color: Colors.black54,
+                  color: MyColor.author,
                 ),
               ),
               const SizedBox(
                 height: 20.0,
               ),
               Hero(
-                tag: "${widget.data.title}",
+                tag: "${data.title}",
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(30.0),
-                  child: Image.network(widget.data.urlToImage!),
+                  child: Image.network(data.urlToImage!),
                 ),
               ),
               const SizedBox(
                 height: 30.0,
               ),
               Text(
-                widget.data.content!,
-                style: const TextStyle(
-                  fontSize: 14,
-                ),
+                data.content!,
+                style: MyTypografy.content,
                 textAlign: TextAlign.justify,
               ),
               const SizedBox(
                 height: 30.0,
               ),
               Row(
-                //! https://pub.dev/packages/flutter_share
-                //! BUAT LOGIC SHARE TO SOCIAL MEDIA
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   IconButton(
                     icon: const Icon(Icons.thumb_up_rounded),
                     onPressed: () {
-                      // Aksi ketika button diklik
+                      const Icon(
+                        Icons.thumb_up_alt_rounded,
+                        color: Colors.red,
+                      );
                     },
                   ),
                   IconButton(
                     icon: const Icon(Icons.thumb_down_rounded),
                     onPressed: () {
-                      // Aksi ketika button diklik
+                      const Icon(
+                        Icons.thumb_down_alt_rounded,
+                        color: Colors.red,
+                      );
                     },
                   ),
                   IconButton(
                     icon: const Icon(Icons.share_rounded),
-                    onPressed: () {
-                      // Aksi ketika button diklik
-                    },
+                    onPressed: () {},
                   ),
                 ],
               )

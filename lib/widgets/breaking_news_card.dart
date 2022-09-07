@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:news_app_tut/models/news_model.dart';
-import 'package:news_app_tut/screens/details_screen.dart';
+import 'package:aninews/components/my_color.dart';
+import 'package:aninews/models/news_model.dart';
+import 'package:aninews/screens/news_page.dart';
 
-class BreakingNewsCard extends StatefulWidget {
+// ignore: must_be_immutable
+class BreakingNewsCard extends StatelessWidget {
   BreakingNewsCard(this.data, {Key? key}) : super(key: key);
   NewsData data;
-  @override
-  State<BreakingNewsCard> createState() => _BreakingNewsCardState();
-}
-
-class _BreakingNewsCardState extends State<BreakingNewsCard> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -17,7 +14,7 @@ class _BreakingNewsCardState extends State<BreakingNewsCard> {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => DetailsScreen(widget.data),
+              builder: (context) => NewsPage(data),
             ));
       },
       child: Container(
@@ -25,14 +22,14 @@ class _BreakingNewsCardState extends State<BreakingNewsCard> {
           borderRadius: BorderRadius.circular(30.0),
           image: DecorationImage(
             fit: BoxFit.fill,
-            image: NetworkImage(widget.data.urlToImage!),
+            image: NetworkImage(data.urlToImage!),
           ),
         ),
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30.0),
             gradient: const LinearGradient(
-              colors: [Colors.transparent, Colors.black],
+              colors: [Colors.transparent, MyColor.bgNewsCard],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
@@ -43,9 +40,9 @@ class _BreakingNewsCardState extends State<BreakingNewsCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                widget.data.title!,
+                data.title!,
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: MyColor.titleCard,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
@@ -54,9 +51,9 @@ class _BreakingNewsCardState extends State<BreakingNewsCard> {
                 height: 8.0,
               ),
               Text(
-                widget.data.author!,
+                data.author!,
                 style: const TextStyle(
-                  color: Colors.white54,
+                  color: Colors.white70,
                   fontSize: 14,
                   fontWeight: FontWeight.normal,
                 ),

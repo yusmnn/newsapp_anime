@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news_app_tut/screens/home_screen.dart';
+
+import 'screens/mobile_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: MobilePage(),
     );
   }
 }

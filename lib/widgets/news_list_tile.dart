@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:news_app_tut/models/news_model.dart';
+import 'package:aninews/models/news_model.dart';
 
-import '../screens/details_screen.dart';
+import '../screens/news_page.dart';
 
-class NewsListTile extends StatefulWidget {
+// ignore: must_be_immutable
+class NewsListTile extends StatelessWidget {
   NewsListTile(this.data, {Key? key}) : super(key: key);
   NewsData data;
-  @override
-  State<NewsListTile> createState() => _NewsListTileState();
-}
-
-class _NewsListTileState extends State<NewsListTile> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DetailsScreen(widget.data),
-            ));
+          context,
+          MaterialPageRoute(
+            builder: (context) => NewsPage(data),
+          ),
+        );
       },
       child: Container(
         width: double.infinity,
@@ -27,7 +24,14 @@ class _NewsListTileState extends State<NewsListTile> {
         padding: const EdgeInsets.all(12.0),
         height: 130,
         decoration: BoxDecoration(
-          color: Colors.black,
+          gradient: const LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              Color.fromARGB(255, 6, 53, 91),
+              Color.fromARGB(255, 65, 5, 5),
+            ],
+          ),
           borderRadius: BorderRadius.circular(26.0),
         ),
         child: Row(
@@ -35,13 +39,13 @@ class _NewsListTileState extends State<NewsListTile> {
             Flexible(
               flex: 1,
               child: Hero(
-                tag: "${widget.data.title}",
+                tag: "${data.title}",
                 child: Container(
                   height: 100.0,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.0),
                     image: DecorationImage(
-                      image: NetworkImage(widget.data.urlToImage!),
+                      image: NetworkImage(data.urlToImage!),
                       fit: BoxFit.fitHeight,
                     ),
                   ),
@@ -52,24 +56,27 @@ class _NewsListTileState extends State<NewsListTile> {
               width: 10.0,
             ),
             Flexible(
-                flex: 5,
-                child: Column(
-                  children: [
-                    Text(
-                      widget.data.title!,
-                      style: const TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
+              flex: 4,
+              child: Column(
+                children: [
+                  Text(
+                    data.title!,
+                    style: const TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    height: 8.0,
+                  ),
+                  Text(
+                    data.content!,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: Colors.white54,
                     ),
-                    const SizedBox(
-                      height: 8.0,
-                    ),
-                    Text(widget.data.content!,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: Colors.white54,
-                        ))
-                  ],
-                ))
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

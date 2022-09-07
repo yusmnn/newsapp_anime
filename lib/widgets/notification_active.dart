@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:aninews/components/my_color.dart';
 
 class NotifocationsActive extends StatefulWidget {
   const NotifocationsActive({super.key});
@@ -16,7 +17,7 @@ class _NotifocationsActiveState extends State<NotifocationsActive> {
         notifActive
             ? Icons.notifications_none_rounded
             : Icons.notification_add_rounded,
-        color: Colors.black,
+        color: MyColor.iconColors,
       ),
       onPressed: () {
         setState(() {
