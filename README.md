@@ -1,4 +1,8 @@
 # AniNews app
+- carousel_slider
+- anim_search_bar
+- curved_navigation_bar
+- google_fonts
 ## ScreenShot
 
 | Home Page       | favorited Page  |
